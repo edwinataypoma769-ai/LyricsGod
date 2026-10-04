@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lyrics For God · Asistencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- 1. BIENVENIDA -->
+<section id="welcome" class="screen active">
+  <div class="poster">
+    <div class="poster-actions">
+      <button class="btn btn-gold" data-go="codeScreen">Entrar con código</button>
+      <button class="btn btn-blue" data-go="loginScreen">Soy administrador</button>
+    </div>
+  </div>
+</section>
+
+<!-- 2. CÓDIGO DE USUARIO -->
+<section id="codeScreen" class="screen">
+  <div class="panel">
+    <h2 class="wave">Ingresa a tu salón</h2>
+    <p>Escribe el código que te dio el administrador.</p>
+    <input id="codeInput" class="field big" placeholder="CÓDIGO" autocomplete="off" maxlength="20">
+    <button class="btn btn-gold" id="codeBtn">Entrar al salón</button>
+    <button class="btn btn-ghost" data-go="welcome">Volver</button>
+    <p class="msg" id="codeMsg"></p>
+  </div>
+</section>
+
+<!-- 3. LOGIN ADMIN -->
+<section id="loginScreen" class="screen">
+  <div class="panel">
+    <h2 class="wave">Administrador</h2>
+    <input id="email" class="field" type="email" placeholder="Correo">
+    <input id="pass" class="field" type="password" placeholder="Contraseña">
+    <button class="btn btn-blue" id="loginBtn">Iniciar sesión</button>
+    <button class="btn btn-ghost" data-go="welcome">Volver</button>
+    <p class="msg" id="loginMsg"></p>
+  </div>
+</section>
+
+<!-- 4. SALONES (ADMIN) -->
+<section id="salonsScreen" class="screen">
+  <header class="top">
+    <h2 class="wave">Salones</h2>
+    <button class="btn btn-ghost small" id="logoutBtn">Cerrar sesión</button>
+  </header>
+  <div class="grid" id="salonGrid"></div>
+</section>
+
+<!-- 5. SALÓN -->
+<section id="roomScreen" class="screen">
+  <header class="top">
+    <button class="btn btn-ghost small" id="backBtn">‹ Volver</button>
+    <h2 class="wave" id="roomTitle"></h2>
+    <input type="date" id="dayInput" class="field date">
+  </header>
+
+  <div class="toolbar">
+    <button class="btn btn-blue small" id="csvBtn">Descargar lista</button>
+    <button class="btn btn-gold small admin-only" id="addBtn">+ Añadir persona</button>
+    <button class="btn btn-blue small admin-only" id="codesBtn">Códigos de acceso</button>
+  </div>
+
+  <div class="summary" id="summary"></div>
+  <div class="people" id="people"></div>
+</section>
+
+<!-- MODAL AÑADIR -->
+<div class="modal" id="addModal">
+  <div class="panel">
+    <h3 class="wave">Añadir persona</h3>
+    <input id="newName" class="field" placeholder="Nombre completo">
+    <div class="seg" id="genderSeg">
+      <button class="seg-btn on" data-v="F"><img src="img/mujer.jpg" alt="">Mujer</button>
+      <button class="seg-btn" data-v="M"><img src="img/varon.jpg" alt="">Varón</button>
+    </div>
+    <select id="newRole" class="field">
+      <option value="student">Estudiante</option>
+      <option value="teacher">Docente</option>
+    </select>
+    <button class="btn btn-gold" id="saveBtn">Guardar</button>
+    <button class="btn btn-ghost" data-close>Cancelar</button>
+  </div>
+</div>
+
+<!-- MODAL CÓDIGOS -->
+<div class="modal" id="codesModal">
+  <div class="panel">
+    <h3 class="wave">Códigos de este salón</h3>
+    <div id="codesList"></div>
+    <input id="codeLabel" class="field" placeholder="¿Para quién es? (ej. Prof. Ana)">
+    <button class="btn btn-gold" id="genCode">Generar código nuevo</button>
+    <button class="btn btn-ghost" data-close>Cerrar</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
